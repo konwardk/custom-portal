@@ -50,15 +50,16 @@ export default function InputName() {
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter your name"
           />
-          <Button onClick={showName} text="Save" />
+          <Button onClick={showName} text="Save & Next" />
         </div>
-      </div>
-
-      {showMessage && (
+        {showMessage && (
         <div className="flex justify-center items-center text-2xl font-semibold text-stone-800 mt-4">
           {displayName}
         </div>
       )}
+      </div>
+
+      
     </>
   )
 }

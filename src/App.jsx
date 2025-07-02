@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify'
 import Home from './views/Home'
 import InputName from './views/InputName'
 import InputLogo from './views/InputLogo'
+import InputGallery from './views/InputGallery'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/input-name" element={<InputName />} />
           <Route path="/input-logo" element={<InputLogo />} />
+          <Route path="/input-images" element={<InputGallery />} />
         </Routes>
         <ToastContainer position="top-right" />
 
