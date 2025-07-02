@@ -1,0 +1,67 @@
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { Button } from '../components/Button'
+
+export default function InputLogo() {
+  const [fileName, setFileName] = useState('No file selected')
+  const [previewUrl, setPreviewUrl] = useState('')
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast.warning('Please select a valid image file')
+        setFileName('Invalid file type')
+        setPreviewUrl('')
+        return
+      }
+
+      setFileName(file.name)
+      setPreviewUrl(URL.createObjectURL(file))
+      toast.success('Image selected successfully!')
+    }
+  }
+
+  const saveImage = () => {
+    if (!previewUrl) {
+      toast.error('Please select an image before saving')
+      return
+    }
+
+    toast.success('Image saved successfully!')
+    // Optionally redirect or upload logic here
+  }
+
+  return (
+    <>
+        <h3>Add a Logo to your Portal</h3>
+        <div className="flex flex-col items-center gap-4 p-6">
+      {/* Native file input with label */}
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        className="block bg-blue-100 text-blue-700 rounded file:mr-4 file:py-2 file:px-4 file:rounded file:border-0
+                   file:text-sm file:font-semibold file:bg-blue-600 file:text-white
+                   hover:file:bg-blue-700"
+      />
+
+      {/* File name */}
+      <div className="text-sm text-gray-600 italic">{fileName}</div>
+
+      {/* Preview */}
+      {previewUrl && (
+        <img
+          src={previewUrl}
+          alt="Preview"
+          className="w-32 h-32 object-contain border rounded shadow"
+        />
+      )}
+
+      {/* Save button */}
+      <Button text="Save" onClick={saveImage} />
+    </div>
+    </>
+  )
+}
